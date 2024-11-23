@@ -42,10 +42,7 @@ const ICPAuth = () => {
         setPrincipal(loggedPrincipal);
 
         // Set the ICP principal in a cookie for server-side access
-        setCookie('userPrincipal', loggedPrincipal, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 30,
-        }); // Expires in 30 days
+        setCookie('userPrincipal', loggedPrincipal); // Expires in 30 days
 
         router.push('/');
       });
