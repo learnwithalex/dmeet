@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/providers/AuthProvider";
-import { useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { useRouter } from "next/navigation";
+import { useAuth } from '@/providers/AuthProvider';
+import { useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { useRouter } from 'next/navigation';
 
-import { useGetCallById } from "@/hooks/useGetCallById";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { useGetCallById } from '@/hooks/useGetCallById';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import { getCookie } from 'cookies-next';
 
 const Table = ({
   title,
@@ -30,17 +31,18 @@ const Table = ({
 const PersonalRoom = () => {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
+  const userid = getCookie('userPrincipal');
   const client = useStreamVideoClient();
   const { toast } = useToast();
 
-  const meetingId = user?.id;
+  const meetingId = !userid;
 
   const { call } = useGetCallById(meetingId!);
 
   const startRoom = async () => {
     if (!client || !isAuthenticated) return;
 
-    const newCall = client.call("default", meetingId!);
+    const newCall = client.call('default', meetingId!);
 
     if (!call) {
       await newCall.getOrCreate({
@@ -72,7 +74,7 @@ const PersonalRoom = () => {
           onClick={() => {
             navigator.clipboard.writeText(meetingLink);
             toast({
-              title: "Link Copied",
+              title: 'Link Copied',
             });
           }}
         >

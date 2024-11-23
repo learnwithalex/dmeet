@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { Roboto_Serif } from 'next/font/google';
+import { Roboto_Serif as RobotoS } from 'next/font/google';
 
 import '@stream-io/video-react-sdk/dist/css/styles.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -8,7 +8,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/providers/AuthProvider';
 
-const roboto = Roboto_Serif({ subsets: ['latin'] });
+const roboto = RobotoS({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Dmeet',
