@@ -55,7 +55,7 @@ const ICPAuth = () => {
       setPrincipal(null);
 
       // Remove the userPrincipal cookie on logout
-      setCookie('userPrincipal', '', { path: '/', maxAge: -1 }); // Cookie will be deleted
+      setCookie('userPrincipal', ''); // Cookie will be deleted
     }
   };
 
