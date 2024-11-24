@@ -68,6 +68,9 @@ const ICPAuth = () => {
             <p className="text-[26px] font-extrabold text-white">Dmeet</p>
           </div>
         </h1>
+        <p className="text-sm text-white mb-5">
+          Decentralized meetings for everyone
+        </p>
         {principal ? (
           <>
             <p className="text">
@@ -79,7 +82,7 @@ const ICPAuth = () => {
           </>
         ) : (
           <button className="button login" onClick={handleLogin}>
-            Login with ICP Identity
+            Sign in with ICP Identity
           </button>
         )}
       </div>
@@ -102,7 +105,7 @@ const ICPAuth = () => {
         .title {
           color: white;
           font-size: 1.5rem;
-          margin-bottom: 1rem;
+          margin-bottom: 3px;
           display: flex;
           justify-content: center;
         }

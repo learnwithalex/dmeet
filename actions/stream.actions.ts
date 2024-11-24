@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 const STREAM_API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 const STREAM_API_SECRET = process.env.STREAM_SECRET_KEY;
 
-export const tokenProvider = async (req: Request) => {
+export const tokenProvider = async () => {
   // Parse cookies from the request headers
   const userPrincipal = getCookie('userPrincipal', { cookies }); // Assuming the user principal is stored in a cookie called `userPrincipal`
 

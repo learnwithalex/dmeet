@@ -7,13 +7,16 @@ import gravatarUrl from 'gravatar-url';
 import { tokenProvider } from '@/actions/stream.actions';
 import Loader from '@/components/Loader';
 import * as crypto from 'crypto';
+import { getCookie } from 'cookies-next';
 
 const API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
 const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
   const [videoClient, setVideoClient] = useState<StreamVideoClient>();
 
-  const { isAuthenticated, principal } = useAuth();
+  const { isAuthenticated } = useAuth();
+
+  const userid = getCookie('userPrincipal');
 
   const generateRandomName = () => {
     return crypto.randomBytes(8).toString('hex'); // Generate a random string
@@ -26,15 +29,17 @@ const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
     const client = new StreamVideoClient({
       apiKey: API_KEY,
       user: {
-        id: principal,
-        name: generateRandomName(),
-        image: gravatarUrl(principal!, { size: 80, default: 'identicon' }),
+        id: userid!.toString(),
+        name: generateRandomName() || '',
+        image:
+          gravatarUrl(userid!.toString(), { size: 80, default: 'identicon' }) ||
+          '',
       },
       tokenProvider,
     });
 
     setVideoClient(client);
-  }, [isAuthenticated, principal]);
+  }, [isAuthenticated, userid]);
 
   if (!videoClient) return <Loader />;
 
